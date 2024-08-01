@@ -1,5 +1,6 @@
 {
     "version": 2,
+    "installCommand": "npm install",
     "builds": [
       {
         "src": "index.js",
@@ -16,8 +17,16 @@
     ],
     "routes": [
       {
-        "src": "/api/(.*)",
-        "dest": "/server.js"
+        "src": "/groups",
+        "dest": "/routes/groups.js"
+      },
+      {
+        "src": "/notes",
+        "dest": "/routes/notes.js"
+      },
+      {
+        "src": "/(.*)",
+        "dest": "/index.js"
       }
     ]
   }

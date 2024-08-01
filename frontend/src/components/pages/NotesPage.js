@@ -4,7 +4,7 @@ import Note from '../Note';
 import CreateGroupModal from '../CreateGroupModal';
 import NoteInput from '../NoteInput';
 import axios from 'axios';
-axios.defaults.baseURL = 'http://localhost:4000';
+axios.defaults.baseURL = 'https://note-making-app-api.vercel.app/';
 
 const NotesPage = () => {
   const [groups, setGroups] = useState([]);
