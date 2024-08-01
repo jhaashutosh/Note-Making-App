@@ -13,6 +13,9 @@ app.use(express.json());
 
 app.use('/api/groups', groupRoutes);
 app.use('/api/notes', noteRoutes);
+app.get('/', (req, res) => {
+  res.send('Hello World!');
+});
 
 mongoose.connect(process.env.MONGODB_URI, {
   useNewUrlParser: true,
