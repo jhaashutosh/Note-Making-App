@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import { IoMdSend as SendIcon} from "react-icons/io";
 
 const NoteInput = ({ groupId, fetchNotes }) => {
   const [noteContent, setNoteContent] = useState('');
 
-  const handleSend = async () => {
+  const handleSend = async (e) => {
+    e.preventDefault();
     if (noteContent.trim()) {
       await axios.post('/api/notes', { groupId, content: noteContent });
       setNoteContent('');
@@ -13,21 +15,22 @@ const NoteInput = ({ groupId, fetchNotes }) => {
   };
 
   return (
-    <div className="note-input">
+    <form className="note-input" onSubmit={handleSend}>
       <input
         type="text"
-        placeholder="Enter your text here..."
+        placeholder="Here's the sample text for sample work"
         value={noteContent}
         onChange={(e) => setNoteContent(e.target.value)}
       />
       <button
         className="send-btn"
         onClick={handleSend}
+        style={{background: 'none', color: 'black', border: 'none', fontSize: '18px'}}
         disabled={!noteContent.trim()}
       >
-        Send
+        <SendIcon />
       </button>
-    </div>
+    </form>
   );
 };
 

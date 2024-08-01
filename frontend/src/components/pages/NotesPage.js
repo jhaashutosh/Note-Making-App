@@ -3,8 +3,39 @@ import NoteGroup from '../NoteGroup';
 import Note from '../Note';
 import CreateGroupModal from '../CreateGroupModal';
 import NoteInput from '../NoteInput';
+import styled from 'styled-components';
 import axios from 'axios';
+import FallbackPage from './FallbackPage';
 axios.defaults.baseURL = 'https://note-making-app-api.vercel.app/';
+
+const ButtonContainer = styled.div`
+    display: flex;
+    justify-content: flex-end;
+    gap: 8px;
+    margin-top: 8px;
+    position: absolute;
+    bottom: 40px;
+    right: 20px;
+`;
+
+const SidebarHeader = styled.div`
+    padding: 24px 20px 30px 20px;
+    text-align: center;
+    font-weight: 600;
+    font-size: 24px;
+`;
+
+const SideContent = styled.div`
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    overflow-y: auto;
+`;
+
+const Image = styled.img`
+    width: 100%;
+    height: 100%;
+`;
 
 const NotesPage = () => {
   const [groups, setGroups] = useState([]);
@@ -32,20 +63,32 @@ const NotesPage = () => {
     setNotes(response.data);
   };
 
+  const handleDeleteGroup = async (groupId) => {
+    await axios.delete(`/api/groups/${groupId}`);
+    fetchGroups();
+  };
+
   return (
     <div className="notes-page">
       <div className="sidebar">
-        {groups.map((group) => (
-          <NoteGroup
-            key={group._id}
-            group={group}
-            onSelect={() => setSelectedGroup(group)}
-          />
-        ))}
-        <button className="add-group-btn" onClick={() => setShowModal(true)}>+</button>
+        <SidebarHeader>Pocket Notes</SidebarHeader>
+        <SideContent>
+            {groups.map((group) => (
+            <NoteGroup
+                key={group._id}
+                group={group}
+                selectedGroup={selectedGroup}
+                deleteGroup={handleDeleteGroup}
+                onSelect={() => setSelectedGroup(group)}
+            />
+            ))}
+        </SideContent>
+        <ButtonContainer>
+            <button className="add-group-btn" onClick={() => setShowModal(true)}>+</button>
+        </ButtonContainer>
       </div>
       <div className="main-content">
-        {selectedGroup && (
+        {selectedGroup ? (
           <>
             <h2>{selectedGroup.name}</h2>
             <div className="notes-list">
@@ -55,7 +98,7 @@ const NotesPage = () => {
             </div>
             <NoteInput groupId={selectedGroup._id} fetchNotes={fetchNotes} />
           </>
-        )}
+        ) : <FallbackPage />}
       </div>
       {showModal && <CreateGroupModal onClose={() => setShowModal(false)} fetchGroups={fetchGroups} />}
     </div>

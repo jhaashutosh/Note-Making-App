@@ -14,4 +14,10 @@ router.get('/', async (req, res) => {
   res.send(groups);
 });
 
+router.delete('/:id', async (req, res) => {
+  const { id } = req.params;
+  await Group.findByIdAndDelete(id);
+  res.send();
+});
+
 module.exports = router;

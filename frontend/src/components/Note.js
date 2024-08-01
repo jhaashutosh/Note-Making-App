@@ -11,6 +11,14 @@ const Note = ({ note, fetchNotes }) => {
     setIsEditing(false);
   };
 
+  const formatDate = (dateString) => {
+    const options = { day: 'numeric', month: 'long', year: 'numeric' };
+    const date = new Date(dateString).toLocaleDateString(undefined, options);
+    const timeOptions = { hour: 'numeric', minute: 'numeric', hour12: true };
+    const time = new Date(dateString).toLocaleTimeString(undefined, timeOptions);
+    return `${date} • ${time}`;
+  };
+
   return (
     <div className="note">
       {isEditing ? (
@@ -26,11 +34,10 @@ const Note = ({ note, fetchNotes }) => {
         <div>
           <p>{note.content}</p>
           <div className="note-footer">
-            <div style={{ display: 'flex', gap: '8px' }}>
-                <span>{new Date(note.createdAt).toLocaleDateString()}</span>
-                <span>{new Date(note.createdAt).toLocaleTimeString()}</span>
+            <button className="edit-button" onClick={() => setIsEditing(true)}>Edit</button>
+            <div style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
+                <span style={{ fontSize: '12px', color: '#353535', fontWeight: '600'}}>{formatDate(note.createdAt)}</span>
             </div>
-            <button onClick={() => setIsEditing(true)}>Edit</button>
           </div>
         </div>
       )}

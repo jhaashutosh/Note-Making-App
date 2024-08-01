@@ -1,0 +1,80 @@
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(0, 0, 0, 0.5);
+  }
+  
+  .modal-content {
+    background: white;
+    padding: 20px 40px;
+    border-radius: 8px;
+    max-width: 400px;
+    width: 100%;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .form-group {
+    margin-bottom: 15px;
+  }
+  
+  label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 5px;
+    width: 100%;
+  }
+  
+  input[type="text"] {
+    width: 100%;
+    padding: 8px 16px;
+    border-radius: 16px;
+    border: 1px solid #ccc;
+  }
+  
+  .color-picker {
+    display: flex;
+    gap: 10px;
+  }
+  
+  .color-circle {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    cursor: pointer;
+    border: 2px solid transparent;
+  }
+  
+  .color-circle:hover {
+    border-color: #000;
+  }
+  
+  .form-actions {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+  }
+  
+  .create-button {
+    background-color: #001F8B;
+    color: white;
+    padding: 6px 32px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+  }
+  
+  .cancel-button {
+    background-color: #ccc;
+    color: white;
+    padding: 6px 32px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+  }
+  
