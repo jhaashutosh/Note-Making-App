@@ -66,6 +66,7 @@ const NotesPage = () => {
   const handleDeleteGroup = async (groupId) => {
     await axios.delete(`/api/groups/${groupId}`);
     fetchGroups();
+    setSelectedGroup(null);
   };
 
   return (
