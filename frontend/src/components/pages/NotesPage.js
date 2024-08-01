@@ -37,6 +37,17 @@ const Image = styled.img`
     height: 100%;
 `;
 
+const NoteHeader = styled.div`
+    display: flex;
+    align-items: center;
+    padding: 16px 16px;
+    font-weight: 600;
+    font-size: 24px;
+    background: #001F8B;
+    color: white;
+    margin-bottom: 16px;
+`
+
 const NotesPage = () => {
   const [groups, setGroups] = useState([]);
   const [notes, setNotes] = useState([]);
@@ -91,7 +102,7 @@ const NotesPage = () => {
       <div className="main-content">
         {selectedGroup ? (
           <>
-            <h2>{selectedGroup.name}</h2>
+            <NoteHeader>{selectedGroup.name}</NoteHeader>
             <div className="notes-list">
               {notes.map((note) => (
                 <Note key={note._id} note={note} fetchNotes={fetchNotes} />
